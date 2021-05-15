@@ -5,7 +5,7 @@ defmodule Flightex.Users.UserTest do
 
   import Flightex.Factory
 
-  describe "build/4" do
+  describe "build/3" do
     test "when all params are valid, returns the user" do
       {_ok, response} =
         User.build(
@@ -19,7 +19,7 @@ defmodule Flightex.Users.UserTest do
       assert response == expected_response
     end
 
-    test "when cpf is a integer" do
+    test "when cpf is a integer, returns an error" do
       response =
         User.build(
           "Jp",
