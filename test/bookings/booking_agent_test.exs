@@ -61,4 +61,34 @@ defmodule Flightex.Bookings.AgentTest do
       assert response == expected_response
     end
   end
+
+  describe "list_all/0" do
+    setup do
+      BookingsAgent.start_link(%{})
+
+      :ok
+    end
+
+    test "When called it should return all bookings" do
+      # Arrange
+      booking1 = build(:booking)
+      BookingsAgent.save(booking1)
+
+      booking2 = build(:booking)
+      BookingsAgent.save(booking2)
+
+      # Act
+      response = BookingsAgent.list_all()
+
+      # Assert
+      expected_response =
+        Enum.into(
+          [booking1, booking2],
+          %{},
+          fn %{id: id} = item -> {id, item} end
+        )
+
+      assert response == expected_response
+    end
+  end
 end

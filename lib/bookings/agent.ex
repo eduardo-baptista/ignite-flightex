@@ -18,6 +18,9 @@ defmodule Flightex.Bookings.Agent do
     Agent.get(__MODULE__, &get_booking_by_uuid(&1, uuid))
   end
 
+  @spec list_all :: map()
+  def list_all, do: Agent.get(__MODULE__, & &1)
+
   defp update_booking_by_uuid(state, %Booking{id: uuid} = booking) do
     Map.put(state, uuid, booking)
   end
