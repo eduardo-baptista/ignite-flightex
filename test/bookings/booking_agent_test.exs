@@ -31,7 +31,7 @@ defmodule Flightex.Bookings.AgentTest do
       {:ok, id: UUID.uuid4()}
     end
 
-    test "when the user is found, return a booking", %{id: id} do
+    test "when the booking is found, return the booking", %{id: id} do
       booking = build(:booking, id: id)
       {:ok, uuid} = BookingsAgent.save(booking)
 
@@ -50,7 +50,7 @@ defmodule Flightex.Bookings.AgentTest do
       assert response == expected_response
     end
 
-    test "when the user wasn't found, returns an error", %{id: id} do
+    test "when the booking wasn't found, returns an error", %{id: id} do
       booking = build(:booking, id: id)
       {:ok, _uuid} = BookingsAgent.save(booking)
 
